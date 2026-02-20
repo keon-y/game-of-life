@@ -1,22 +1,34 @@
 package com.keony.app.core.engine;
 
+import com.keony.app.core.events.GridUpdateListener;
 import com.keony.app.core.rules.ConwayRules;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class GameEngine {
 
+    private final List<GridUpdateListener> gridListeners = new ArrayList<>();
     private final int width;
     private final int height;
     private boolean[][] grid;
 
-    public GameEngine(int height, int width) {
-         this.grid = new boolean[width][height];
-         this.width = width;
-         this.height = height;
+    public GameEngine(int gridHeight, int gridWidth) {
+         this.grid = new boolean[gridHeight][gridWidth];
+         this.width = gridWidth;
+         this.height = gridHeight;
     }
 
+    private void updateListeners() {
+        for (GridUpdateListener listener : gridListeners) {
+            listener.onGridUpdated(this.grid);
+        }
+    }
+
+    // Passes to the next generation and notify all listeners
     public void nextGeneration() {
         grid = ConwayRules.passGeneration(grid);
+        updateListeners();
     }
 
 
@@ -25,11 +37,13 @@ public class GameEngine {
         if (x >= 0 && x < width && y >= 0 && y < height) {
             grid[x][y] = !grid[x][y];
         }
+        updateListeners();
     }
 
     // Clears the grid by setting all cells to false (dead)
     public void clear() {
         Arrays.fill(grid, false);
+        updateListeners();
     }
 
 
@@ -39,7 +53,11 @@ public class GameEngine {
 
     public void setGrid(boolean[][] grid) {
         this.grid = grid;
+        updateListeners();
     }
 
+    public void addListener(GridUpdateListener listener) {
+        gridListeners.add(listener);
+    }
     
 }
