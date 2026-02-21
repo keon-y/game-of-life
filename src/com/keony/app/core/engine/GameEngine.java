@@ -14,7 +14,7 @@ public class GameEngine {
     private boolean[][] grid;
 
     public GameEngine(int gridHeight, int gridWidth) {
-         this.grid = new boolean[gridHeight][gridWidth];
+         this.grid = new boolean[gridWidth][gridHeight];
          this.width = gridWidth;
          this.height = gridHeight;
     }
