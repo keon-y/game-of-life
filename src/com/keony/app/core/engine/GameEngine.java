@@ -56,6 +56,20 @@ public class GameEngine {
         updateListeners();
     }
 
+    public void setCell(int x, int y, boolean state) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            grid[x][y] = state;
+        }
+        updateListeners();
+    }
+
+    public boolean getCell(int x, int y) {
+        if (x >= 0 && x < width && y >= 0 && y < height) {
+            return grid[x][y];
+        }
+        return false;
+    }
+
     public void addListener(GridUpdateListener listener) {
         gridListeners.add(listener);
     }
