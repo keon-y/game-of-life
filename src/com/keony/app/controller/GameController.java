@@ -22,14 +22,13 @@ public class GameController implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int cellSize = mainWindow.getGamePanel().getCellsize();
-        gameEngine.toggleCell(e.getX() / cellSize, e.getY() / cellSize);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         int cellSize = mainWindow.getGamePanel().getCellsize();
-        this.firstCellState = gameEngine.getCell(e.getX() / cellSize, e.getY() / cellSize); // Captures the state of the first clicked cell 
+        this.firstCellState = gameEngine.getCell(e.getX() / cellSize, e.getY() / cellSize); // Captures the state of the first clicked cell
+        gameEngine.toggleCell(e.getX() / cellSize, e.getY() / cellSize);
     }
 
     @Override
