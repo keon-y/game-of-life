@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
 
         GameEngine gameEngine = new GameEngine(GRID_HEIGHT, GRID_WIDTH);
-        MainWindow mainWindow = new MainWindow(GRID_HEIGHT * CELL_SIZE, GRID_HEIGHT*CELL_SIZE);
+        MainWindow mainWindow = new MainWindow(GRID_HEIGHT * CELL_SIZE, GRID_HEIGHT * CELL_SIZE);
         GameController gameController = new GameController(mainWindow, gameEngine);
 
         mainWindow.setVisible(true);
