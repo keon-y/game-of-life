@@ -35,6 +35,10 @@ public class GamePanel extends JPanel implements GridUpdateListener {
         this.cellSize = size;
     }
 
+    public int getCellsize() {
+        return this.cellSize;
+    }
+
     public void setGrid(boolean[][] grid) {
         this.grid = grid;
         repaint();

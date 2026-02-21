@@ -13,12 +13,13 @@ public class GameController implements MouseListener {
         this.mainWindow = mainWindow;
         this.gameEngine = gameEngine;
         gameEngine.addListener(mainWindow.getGamePanel());
-        this.mainWindow.addMouseListener(this);
+        this.mainWindow.getGamePanel().addMouseListener(this);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        //TODO: ADD MOUSE EVENTS
+        int cellSize = mainWindow.getGamePanel().getCellsize();
+        gameEngine.toggleCell(e.getX() / cellSize, e.getY() / cellSize);
     }
 
     @Override
