@@ -2,7 +2,9 @@ package com.keony.app.ui.window;
 
 import com.keony.app.ui.components.GamePanel;
 import java.awt.Dimension;
+import java.awt.Point;
 import javax.swing.*;
+
 
 public class MainWindow extends JFrame {
 
@@ -10,10 +12,11 @@ public class MainWindow extends JFrame {
 
     public MainWindow(int height, int width){
         this.gamePanel = new GamePanel();
-        this.gamePanel.setPreferredSize(new Dimension(2000, 2000));
+        this.gamePanel.setPreferredSize(new Dimension(5000, 5000));
         this.setSize(width, height);
 
         JScrollPane scrollPane = new JScrollPane(gamePanel);
+        scrollPane.getViewport().setViewPosition(new Point(2000, 2000));
         
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
