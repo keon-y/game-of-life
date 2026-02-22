@@ -6,8 +6,8 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements GridUpdateListener {
 
-    boolean[][] grid;
-    int cellSize = 10;
+    private boolean[][] grid;
+    private int cellSize = 10;
 
     @Override
     public void paintComponent(Graphics g) {
@@ -20,7 +20,7 @@ public class GamePanel extends JPanel implements GridUpdateListener {
                 if (grid[i][j]) g.setColor(Color.BLACK);
                 else g.setColor(Color.WHITE);
                 
-                g.fillRect(i * cellSize, j * cellSize, cellSize, cellSize);
+                g.fillRect(i * cellSize + i, j * cellSize + j, cellSize, cellSize);
             }
         }
     }
