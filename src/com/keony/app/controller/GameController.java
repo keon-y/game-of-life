@@ -36,8 +36,11 @@ public class GameController implements MouseListener, MouseMotionListener {
         } 
         
         int cellSize = mainWindow.getGamePanel().getCellsize();
-        this.firstCellState = gameEngine.getCell(e.getX() / cellSize, e.getY() / cellSize); // Captures the state of the first clicked cell
-        gameEngine.toggleCell(e.getX() / cellSize, e.getY() / cellSize);
+
+        // Every cell drawn on screen has 1px offset, so we need to account for that
+        // cellSize + 1 accounts for cellsize + offset.
+        this.firstCellState = gameEngine.getCell(e.getX() / (cellSize + 1), e.getY() / (cellSize + 1)); // Captures the state of the first clicked cell
+        gameEngine.toggleCell( e.getX() / (cellSize + 1), e.getY() / (cellSize + 1));
     }
 
     @Override
@@ -67,7 +70,7 @@ public class GameController implements MouseListener, MouseMotionListener {
         
         // Paint cells
         int cellSize = mainWindow.getGamePanel().getCellsize();
-        gameEngine.setCell(e.getX() / cellSize, e.getY() / cellSize, !firstCellState);
+        gameEngine.setCell(e.getX() / (cellSize + 1), e.getY() / (cellSize + 1), !firstCellState);
         
 
     }
