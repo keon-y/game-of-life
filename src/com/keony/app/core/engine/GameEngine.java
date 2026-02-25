@@ -72,6 +72,7 @@ public class GameEngine {
 
     public void addListener(GridUpdateListener listener) {
         gridListeners.add(listener);
+        listener.onGridUpdated(grid); // Update as soon as it joins, so it does not have to wait for the update after a cell/grid change
     }
     
 }
