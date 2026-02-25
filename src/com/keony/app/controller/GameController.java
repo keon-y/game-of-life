@@ -125,7 +125,7 @@ public class GameController implements MouseListener, MouseMotionListener, KeyLi
                 if (isPaused) timer.stop();
                 else if (!isPaused) timer.start();
             break;
-            case 82:
+            case 82: // R key
                 gameEngine.clear();
             break;
         }
