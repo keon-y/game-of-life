@@ -3,7 +3,6 @@ package com.keony.app.core.engine;
 import com.keony.app.core.events.GridUpdateListener;
 import com.keony.app.core.rules.ConwayRules;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -72,9 +71,17 @@ public class GameEngine {
         updateListeners();
     }
 
-    // Clears the grid by setting all cells to false (dead)
+    // Clears the grid by setting all cells to false (dead) and clearing the snapshot list
     public void clear() {
-        Arrays.fill(grid, false);
+        while (gridIterator.hasNext()) {
+            gridIterator.next();
+            gridIterator.remove();
+        }
+        while(gridIterator.hasPrevious()){
+            gridIterator.previous();
+            gridIterator.remove();
+        }
+        this.grid = new boolean[width][height];
         updateListeners();
     }
 

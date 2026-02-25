@@ -116,15 +116,18 @@ public class GameController implements MouseListener, MouseMotionListener, KeyLi
         switch (e.getKeyCode()) {
             case 39: // Arrow right key
                 gameEngine.step(1);
-                break;
+            break;
             case 37: // left arrow key
                 gameEngine.step(-1);
-                break;
+            break;
             case 32: // spacebar
                 isPaused = !isPaused;
                 if (isPaused) timer.stop();
                 else if (!isPaused) timer.start();
-                break;
+            break;
+            case 82:
+                gameEngine.clear();
+            break;
         }
     }
 
