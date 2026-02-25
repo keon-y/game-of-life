@@ -10,12 +10,15 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 public class GameController implements MouseListener, MouseMotionListener, KeyListener {
     private final MainWindow mainWindow;
     private final GameEngine gameEngine;
     private boolean firstCellState; // Saves the state of a cell before clicking
     private Point lastMousePosition;
+    private boolean isPaused = true;
+    private Timer timer;
 
 
     public GameController(MainWindow mainWindow, GameEngine gameEngine) {
@@ -25,6 +28,11 @@ public class GameController implements MouseListener, MouseMotionListener, KeyLi
         this.mainWindow.getGamePanel().addMouseListener(this);
         this.mainWindow.getGamePanel().addMouseMotionListener(this);
         this.mainWindow.addKeyListener(this);
+        
+        timer = new Timer(1000, e -> {
+            gameEngine.step(1);
+        });
+        timer.stop();
     }
 
     @Override
@@ -113,7 +121,9 @@ public class GameController implements MouseListener, MouseMotionListener, KeyLi
                 gameEngine.step(-1);
                 break;
             case 32: // spacebar
-                gameEngine.nextGeneration();
+                isPaused = !isPaused;
+                if (isPaused) timer.stop();
+                else if (!isPaused) timer.start();
                 break;
         }
     }
