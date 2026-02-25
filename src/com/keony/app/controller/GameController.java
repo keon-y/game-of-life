@@ -3,13 +3,15 @@ package com.keony.app.controller;
 import com.keony.app.core.engine.GameEngine;
 import com.keony.app.ui.window.MainWindow;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
-public class GameController implements MouseListener, MouseMotionListener {
+public class GameController implements MouseListener, MouseMotionListener, KeyListener {
     private final MainWindow mainWindow;
     private final GameEngine gameEngine;
     private boolean firstCellState; // Saves the state of a cell before clicking
@@ -22,6 +24,7 @@ public class GameController implements MouseListener, MouseMotionListener {
         gameEngine.addListener(mainWindow.getGamePanel());
         this.mainWindow.getGamePanel().addMouseListener(this);
         this.mainWindow.getGamePanel().addMouseMotionListener(this);
+        this.mainWindow.addKeyListener(this);
     }
 
     @Override
@@ -91,6 +94,26 @@ public class GameController implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        System.out.println(e.getKeyCode());
+        switch (e.getKeyCode()) {
+            case 39: // Arrow right key
+                gameEngine.nextGeneration();
+            break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
         
     }
 }
