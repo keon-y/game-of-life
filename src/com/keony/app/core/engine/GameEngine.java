@@ -49,8 +49,14 @@ public class GameEngine {
                 grid = gridIterator.previous();
                 updateListeners();
             }
-            else if (gridIterator.hasNext()) {
-                grid = gridIterator.next();
+            else {
+                if (gridIterator.hasNext()) {
+                   grid = gridIterator.next(); 
+                }
+                else {
+                    this.nextGeneration();
+                }
+                
                 updateListeners();
             }
         }
@@ -85,7 +91,7 @@ public class GameEngine {
     private void timeTravelIterator(){
         if (gridIterator.hasNext()) {
             ListIterator<boolean[][]> temp = gridIterator;
-            while(gridIterator.hasNext()){
+            while (gridIterator.hasNext()){
                 gridIterator.next();
                 gridIterator.remove();
             }
