@@ -107,8 +107,14 @@ public class GameController implements MouseListener, MouseMotionListener, KeyLi
         System.out.println(e.getKeyCode());
         switch (e.getKeyCode()) {
             case 39: // Arrow right key
+                gameEngine.step(1);
+                break;
+            case 37: // left arrow key
+                gameEngine.step(-1);
+                break;
+            case 32: // spacebar
                 gameEngine.nextGeneration();
-            break;
+                break;
         }
     }
 
