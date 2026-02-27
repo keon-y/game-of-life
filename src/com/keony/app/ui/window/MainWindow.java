@@ -46,6 +46,10 @@ public class MainWindow extends JFrame {
         return this.gamePanel;
     }
 
+    public ControlPanel getControlPanel(){
+        return this.controlPanel;
+    }
+
     public void setGameBounds(int x, int y) {
         gamePanel.setBounds(x, y, this.getWidth(), this.getHeight());
     }

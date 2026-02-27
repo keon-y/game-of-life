@@ -1,6 +1,7 @@
 package com.keony.app.controller;
 
 import com.keony.app.core.engine.GameEngine;
+import com.keony.app.ui.components.ControlPanel;
 import com.keony.app.ui.window.MainWindow;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -28,16 +29,19 @@ public class GameController implements MouseListener, MouseMotionListener, KeyLi
         this.mainWindow.getGamePanel().addMouseListener(this);
         this.mainWindow.getGamePanel().addMouseMotionListener(this);
         this.mainWindow.addKeyListener(this);
+
+        connectButtons();
         
         timer = new Timer(1000, e -> {
             gameEngine.step(1);
         });
         timer.stop();
+
+
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-    }
+    public void mouseClicked(MouseEvent e) {}
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -87,28 +91,19 @@ public class GameController implements MouseListener, MouseMotionListener, KeyLi
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-    }
+    public void mouseReleased(MouseEvent e) {}
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-        //TODO: ADD MOUSE EVENTS
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
-        //TODO: ADD MOUSE EVENTS
-    }
+    public void mouseExited(MouseEvent e) {}
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-        
-    }
+    public void mouseMoved(MouseEvent e) {}
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -132,7 +127,27 @@ public class GameController implements MouseListener, MouseMotionListener, KeyLi
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        
+    public void keyReleased(KeyEvent e) {}
+
+    private void connectButtons() {
+        ControlPanel control = mainWindow.getControlPanel();
+
+        control.getBtnPlay().addActionListener(e -> {
+            isPaused = false;
+            timer.start();
+        });
+
+        control.getBtnPause().addActionListener(e -> {
+            isPaused = true;
+            timer.stop();
+        });
+
+        control.getBtnNext().addActionListener(e -> {
+            gameEngine.step(1);
+        });
+
+        control.getBtnPrev().addActionListener(e -> {
+            gameEngine.step(-1);
+        });
     }
 }
