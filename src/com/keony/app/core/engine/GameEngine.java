@@ -46,18 +46,12 @@ public class GameEngine {
         for (int i = 0; i < Math.abs(stepAmount); i++) {
             if (stepAmount < 0 && gridIterator.hasPrevious()) { // step back
                 grid = gridIterator.previous();
-                updateListeners();
             }
             else {
-                if (gridIterator.hasNext()) {
-                   grid = gridIterator.next(); 
-                }
-                else {
-                    this.nextGeneration();
-                }
-                
-                updateListeners();
+                if (gridIterator.hasNext()) grid = gridIterator.next(); 
+                else this.nextGeneration();
             }
+            updateListeners();
         }
     }
 
@@ -73,6 +67,7 @@ public class GameEngine {
 
     // Clears the grid by setting all cells to false (dead) and clearing the snapshot list
     public void clear() {
+        // Must be some easier way to do this but couldn't think of it
         while (gridIterator.hasNext()) {
             gridIterator.next();
             gridIterator.remove();
